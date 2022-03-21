@@ -30,12 +30,10 @@ for x in range(1,played):
         guess_win = guess_win-1
         guess_loss = guess_loss+1
         middle = points - (guess_win*win + guess_loss*loss)
-        #print("the difference is still {}. I guessed {} wins and {} losses".format(middle, new_guess_win, new_guess_loss))
     if middle > 0:
-        new_guess_win = guess_win+1
-        new_guess_loss = guess_loss-1
+        guess_win = guess_win+1
+        guess_loss = guess_loss-1
         middle = points - (guess_win*win + guess_loss*loss)
-        #print("the difference is still {}. I guessed {} wins and {} losses".format(middle, new_guess_win, new_guess_loss))
     if middle == 0:
         print("I found you ratio! I guessed {} wins (accounts for {} points) and {} losses (accounts for {} points).".format(int(guess_win), int(guess_win)*4, int(guess_loss), int(guess_loss)*1))
         break
