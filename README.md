@@ -2,7 +2,7 @@
 Based on your amount of played matches and gained points, display the win-loss ratio for FIFA FUT Champions
 
 ## Functions of this program
-  1. Tell your win-loss ration based of the amount off games you played and points you earned;
+  1. Tell your win-loss ratio based of the amount off games you played and points you earned;
   2. Tell you how many more wins and losses you need to achieve a certain rank and;
   3. Tell you what the required amount of wins and losses are to achieve any rank.
 
