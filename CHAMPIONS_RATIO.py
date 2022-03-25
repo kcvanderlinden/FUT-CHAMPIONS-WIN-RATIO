@@ -76,6 +76,6 @@ def dialogue():
         message = dialogue()
     return message
 
-print("Welcome to the FUT Champions win-loss ratio tool\nThis tool is capable of 3 different things: \n  1. Tell your win-loss ration based of the amount off games you played and points you earned;\n  2. Tell you how many more wins and losses you need to achieve a certain rank and;\n  3. Tell you what the required amount of wins and losses are to achieve any rank.\nPress 1 to 3 according to what function you want to use of this tool.")
+print("Welcome to the FUT Champions win-loss ratio tool\nThis tool is capable of 3 different things: \n  1. Tell your win-loss ratio based of the amount off games you played and points you earned;\n  2. Tell you how many more wins and losses you need to achieve a certain rank and;\n  3. Tell you what the required amount of wins and losses are to achieve any rank.\nPress 1 to 3 according to what function you want to use of this tool.")
 print(dialogue())
 input("Press ENTER to exit")
