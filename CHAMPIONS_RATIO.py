@@ -8,34 +8,74 @@ Fifth, a new guess is made by substracting one win and adding one loss in case o
 Sixth the process repeats until the difference is zero and thus the correct amount of wins and losses are found. A message is printed with the result.   
 """
 
-print("First I want to know how many games you have played")
-played = int(input())
-print("Second, how many points have you gained untill now?")
-points = int(input())
-win = 4
-loss = 1
+def ratio():
+    print("\n\nYou choose the option to tell your win-loss ration based of the amount off games you played and points you earned.\nFirst I want to know how many games you have played")
+    played = int(input())
+    print("Second, how many points have you gained untill now?")
+    points = int(input())
+    win = 4
+    loss = 1
+    
+    wins = (points - played)/3
+    losses = played - wins
+    points_wins = wins * 4
+    points_losses = losses * 1
+    message = "I found you ratio! You have had {} wins (accounts for {} points) and {} losses (accounts for {} points).".format(int(wins), int(points_wins), int(losses), int(points_losses))
+    return message
 
-# to check if the amount of played matches is even
-if played % 2 == 0:
-    guess_win = played/2
-    guess_loss = played/2
-else:
-    played = played - 1
-    guess_win = played/2
-    guess_loss = played/2+1    
+def goal():
+    print('\n\nYou choose the option to tell you how many more wins and losses you need to achieve a certain rank.\nHow many games have you played?')
+    played = int(input())
+    rest_matches = 20 - played
+    print("Second, how many points have you gained untill now?")
+    points = int(input())
+    win = 4
+    loss = 1
+    
+    ranks = [4, 12, 24, 36, 45, 51, 60, 67, 72, 76]
+    
+    message = ''
+    for x in ranks:
+        achieved = True if points >= x else False
+        if achieved == False:
+            needed_wins = int(((x-points) - rest_matches) / 3) + (x - rest_matches % 3 > 0) 
+            needed_wins = needed_wins if needed_wins >= 0 else 0
+            needed_losses = rest_matches - needed_wins if needed_wins > 0 else int((x-points) / loss)
+            message += "Non achievable\n" if needed_losses < 0 else "For {} points, the minimum amount of wins are {} with {} losses \n".format(x, needed_wins, needed_losses)
+        if achieved == True:
+            message += 'Achieved \n'
+    return message
 
-middle = points - (guess_win*win + guess_loss*loss)
-for x in range(1,played):
-    if middle < 0:
-        guess_win = guess_win-1
-        guess_loss = guess_loss+1
-        middle = points - (guess_win*win + guess_loss*loss)
-    if middle > 0:
-        guess_win = guess_win+1
-        guess_loss = guess_loss-1
-        middle = points - (guess_win*win + guess_loss*loss)
-    if middle == 0:
-        print("I found you ratio! I guessed {} wins (accounts for {} points) and {} losses (accounts for {} points).".format(int(guess_win), int(guess_win)*4, int(guess_loss), int(guess_loss)*1))
-        break
-        
+def minimum_needed():
+    print("\n\nYou choose the option to tell you what the required amount of wins and losses are to achieve any rank.\n")
+    matches = 20
+    win = 4
+    loss = 1   
+    ranks = [4, 12, 24, 36, 45, 51, 60, 67, 72, 76]
+    message = ''
+    
+    for x in ranks:
+        needed_wins = int((x - matches) / 3) + (x - matches % 3 > 0) 
+        needed_wins = needed_wins if needed_wins >= 0 else 0
+        needed_losses = matches - needed_wins if needed_wins > 0 else int(x / loss)
+        # find minimum amount of wins and losses to achieve a rank
+        message += "For {} points, the minimum amount of wins are {} with {} losses \n".format(x, needed_wins, needed_losses)
+    return message
+
+def dialogue():
+    option = input()
+    message = ''
+    if option == '1':
+        message = ratio()
+    elif option == '2':
+        message = goal()
+    elif option == '3':
+        message = minimum_needed()
+    else:
+        print("That is not an option you can choose. Choose again. Only the number 1, 2 and 3 are valid options.")
+        message = dialogue()
+    return message
+
+print("Welcome to the FUT Champions win-loss ratio tool\nThis tool is capable of 3 different things: \n  1. Tell your win-loss ration based of the amount off games you played and points you earned;\n  2. Tell you how many more wins and losses you need to achieve a certain rank and;\n  3. Tell you what the required amount of wins and losses are to achieve any rank.\nPress 1 to 3 according to what function you want to use of this tool.")
+print(dialogue())
 input("Press ENTER to exit")
